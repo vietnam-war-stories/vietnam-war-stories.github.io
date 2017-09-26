@@ -1,112 +1,190 @@
-* { 
-    border-radius: 0px !important;
-    font-family: 'Raleway', serif;
+body {
+    padding-top: 50px;
+    font-family: 'Raleway', sans-serif;
 }
-body { 
-    padding-top: 75px; 
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+::-webkit-scrollbar-track-piece {
+    background-color:lightgray;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #77777A;
 }
 
 .navbar {
-    border-bottom: 1px solid black;
+    min-height: 55px;
+    padding-top: 1px;
+    border-bottom: 1.5px solid #77777A;
 }
-.navbar-brand { 
-    font-size: 44px;
-    font-family: 'Cardo', serif; 
+.navbar-brand {
+    font-size: 27px;
+    font-family: 'Cardo', serif;
+    line-height: 7px;
 }
-.navbar-brand small { 
-    font-size: 15px;
-    text-transform: uppercase; 
-}
-.navbar-brand, .navbar-nav li a {
-    line-height: 75px;
-    height: 75px;
-    padding-top: 0;
-}
-.navbar-nav li a {
+.navbar-brand small {
+    display: block;
+    font-size: 12px;
     text-transform: uppercase;
-    font-weight: bold;
-}
-
-.multiselect {
-    border: 0px solid transparent;
-    background-color: #F8F8F8;
+    padding-top: 13px; padding-left: 5px;
+    font-family: 'Raleway', sans-serif;
 }
 
 #sidebar-container {
     height: 100%;
-    padding: 15px;
-    z-index: auto;
+    padding: 0; margin: 0;
     overflow-y: scroll;
-    background-color: #F8F8F8;
-    border-right: 1px solid black;
+    z-index: 999;
+    background-color: #eee;
+    border-right: 1px solid #77777A;
 }
-#sidebar-search { height: 10%; padding-bottom: 75px; }
-#sidebar-contents { height: 85%; }
-.sidebar-media {
+#search-container {
+    padding: 15px 10px 5px 10px;
+    border-bottom: 1.5px solid #77777A;
+}
+#search-bar, #search-filter-group .btn, #playlist-button, .sidebar-panel {
+    border-radius: 0;
+}
+#search-filter-group .btn {
+    background-color: #eee;
+}
+#search-filter-group .btn:hover {
+    background-color: #d4d4d4;
+}
+#search-form, #search-form-group {
+    padding: 0; margin: 0;
+    padding-bottom: 3px;
+}
+#search-filter-group .btn {
+    border: 0;
+    padding: 7px;
+}
+
+#results-container {
+    padding: 10px 10px 5px 10px;
+}
+.results-panel {
+    margin: 5px 0px 5px 0px;
+    border-radius: 0;
+}
+.results-panel-body {
+    padding: 0; margin: 0;
+}
+.results-add-playlist-button {
+    position: absolute;
+    left: 5px; top: 5px;
+    color: white;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid white;
+}
+.results-add-playlist-button:hover {
+    background-color: #d4d4d4;
+}
+.results-sidebar-media {
     position: relative;
     cursor: pointer;
 }
-.media-image {
-    padding: 0;
-    margin-right: 10px;
+.results-sidebar-media:hover {
+    border: 1px solid black;
+    margin:-1px;
 }
-.sidebar-panel {
-    padding: 0;
-    margin: 0;
-}
-.media-heading {
-    font-weight: bold;
-    font-size: 19px;
-    padding-top: 7px;
+.results-media-body {
+    padding-left: 10px;
     padding-right: 5px;
-    padding-bottom: 0px;
-    margin: 0;
+    position: relative;
 }
-.media-abstract {
-    padding-top: 5px;
-    padding-right: 1px;
-    margin: 0;
+.results-media-image {
+    max-width: 50%;
 }
-.playlist-add { 
-    position: absolute;
-    top: 5; left: 5;
-    border-radius: 50%;
-    padding: 2px 7px 2px 7px;
-    font-size: 16px;
+.results-media-heading, .results-media-contributor {
+    width: 195px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} /* Need to look for a more elegant way to do single- and multi-line ellipsis truncating... */
+.results-media-heading {
+    padding-top: 5px; margin: 0;
+    font-weight: 400;
+}
+.results-media-contributor {
+    margin-top: 0; padding-top: 0;
+}
+.results-media-abstract-excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 0; padding-bottom: 0;
 }
 
 #map-container {
     height: 100%;
     padding: 0; margin: 0;
     position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url(../images/new_paper.jpg);
+    background-size: cover;
 }
-#map {
+
+#vietnam-map-src {
     top: 50%;
-    right: 0px;
+    right: 0;
     height: 100%;
     position: absolute;
     transform: translateY(-50%);
 }
-
-.region-tooltip-container {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid black;
-    width: 50%; height: 50%;
-    top: 20; left: 20;
-    visibility: hidden;
-    position: absolute;
-    z-index: 999;
+#vietnam-map-src stroke, #vietnam-map-src text, #vietnam-map-src #rivers, #vietnam-map-src #trails {
+    pointer-events: none;
 }
-.region-tooltip-container .img-responsive {
-    display: block;
-    width: auto; height: auto;
-    padding-top: 7px; padding-bottom: 7px;
+#vietnam-map-src .highlight-layer, #vietnam-map-src #trails { 
+    opacity: 0; 
+}
+#vietnam-map-src .highlight-layer:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+#world-map {
+    height: 15%; width: 20%;
+    z-index: 999;
+    opacity: 0.8;
+    position: absolute;
+    bottom: 15px; left: 15px;
+    padding: 0; margin: 0;
+    background-color: #DAF5EF;
+    border: 1px solid black;
+
+}
+#world-map:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+#world-map:hover #back-home-text {
+    opacity: 1;
+}
+
+#social-media-corner {
+    z-index: 999;
+    position: absolute;
+    bottom: 12px; right: 15px;
+    text-align: center;
+}
+#social-media-corner a {
+    color: black;
+    height: 100%;
+    font-size: 24px;
+    margin: 2px;
+    text-decoration: none;
 }
 
 .modal-lg {
     width: 90%;
 }
 .modal-content  {
+    border: 1px solid black;
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important; 
@@ -114,7 +192,6 @@ body {
 .modal, .modal-backdrop {
     position: absolute !important;
 }
-
 .modal-topic-title {
     padding: 0; margin: 0; 
     padding-top: 10px; padding-bottom: 5px;
@@ -134,7 +211,6 @@ body {
 .modal-topic-keyword:hover, .modal-topic-keyword:active, .modal-topic-keyword:visited {
     text-decoration: none;
 }
-
 .modal-playlist-topic-title {
     font-weight: bold;
     text-overflow: ellipsis; 
@@ -152,4 +228,27 @@ body {
 .modal-topic-playlist-row {
     margin: 0; padding: 0;
     padding-bottom: 10px;
+}
+
+#region-info-panel {
+    z-index: 999;
+    position: relative;
+    top: 20px; left: 15px;
+    width: 40%; height: 35%;
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: none;
+}
+#region-detailed-info {
+    height: 100%;
+    /* overflow-y: scroll; */
+}
+#region-detailed-map-container {
+    height: 100%; 
+    padding: 0; margin: 0; 
+}
+.region-detailed-image {
+    height: 100%; width: 100%;
+    background-size: cover;
+    margin: 0; padding: 0;
 }
