@@ -75,9 +75,9 @@ body {
     position: absolute;
     left: 5px; top: 5px;
     color: white;
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: transparent;
-    border: 1px solid white;
+    border: 3px solid white;
 }
 .results-add-playlist-button:hover {
     background-color: #d4d4d4;
@@ -139,8 +139,12 @@ body {
 #vietnam-map-src stroke, #vietnam-map-src text, #vietnam-map-src #rivers, #vietnam-map-src #trails {
     pointer-events: none;
 }
-#vietnam-map-src .highlight-layer, #vietnam-map-src #trails { 
+#vietnam-map-src .highlight-layer { 
     opacity: 0; 
+}
+
+#vietnam-map-src #trails {
+    opacity: 1;
 }
 #vietnam-map-src .highlight-layer:hover {
     opacity: 1;
@@ -193,7 +197,10 @@ body {
     position: absolute !important;
 }
 .modal-topic-title {
-    padding: 0; margin: 0; 
+    padding: 0; margin: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
     padding-top: 10px; padding-bottom: 5px;
 }
 .modal-keywords-items {
@@ -239,9 +246,13 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
     display: none;
 }
+.region-detailed-name {
+    font-size: 20px;
+}
 #region-detailed-info {
     height: 100%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    font-size: 12px;
 }
 #region-detailed-map-container {
     height: 100%; 

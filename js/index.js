@@ -118,6 +118,7 @@ function Contributor (id, name, affiliation, subaffiliation, total_contributions
     this.affiliation = affiliation;
     this.subaffiliation = subaffiliation;
     this.total_contributions = total_contributions;
+    this.transcript_link = '';
 }
 function Region (id, name, desc, count, image) {
     this.id = id;
@@ -150,7 +151,7 @@ function getData (data, tabletop) {
             regionTotal ++;
         }
     });
-    $.each(tabletop.sheets("Keywords").all(), function (i, current) {
+    $.each(tabletop.sheets("Glossary").all(), function (i, current) {
        if (keywords[current.keyword_name] == null) {
            keywords[current.keyword_name] = new Keyword (keywordsTotal, current.keyword_name, current.keyword_desc, current.keyword_count);
            keywordsTotal ++;
@@ -160,6 +161,8 @@ function getData (data, tabletop) {
         if (contributors[current.contributor_name] == null) {
             contributors[current.contributor_name] = new Contributor (contributorsTotal, current.contributor_name, current.primary_affiliation, current.secondary_affiliation, current.total_contributions);
             contributorsTotal ++;
+            
+            if (current.transcript_link != '') { contributors[current.contributor_name].transcript_link = current.transcript_link; console.log (contributors[current.contributor_name])}
         }
     });  
     $.each(tabletop.sheets("Map Data").all(), function (i, current) {
@@ -222,15 +225,14 @@ function openTopicModal (topic_id) {
     $('.modal-topic-video-frame').attr('src', embedded_id);
     
     $('.modal-topic-title').html(topics[topic_id].topic);
-    $('.modal-topic-contributor').html(topics[topic_id].contributor);
-    $('.modal-topic-contributor-affiliation').html(contributors[topics[topic_id].contributor].affiliation + " - " + contributors[topics[topic_id].contributor].subaffiliation);
-    $('.modal-topic-time-period').html(topics[topic_id].time_period);
-    $('.modal-topic-region').html(topics[topic_id].region);
+    $('.modal-topic-contributor').html(topics[topic_id].contributor + "   |   " + contributors[topics[topic_id].contributor].affiliation + " | " + contributors[topics[topic_id].contributor].subaffiliation);
+    $('.modal-topic-time-period').html("<b>" + topics[topic_id].region + " | " + topics[topic_id].time_period + "</b>");
+
     
     $('#modal-region-img').attr('src', regions[topics[topic_id].region].image)
     $('.modal-topic-abstract').html(topics[topic_id].topic_abstract);
     $('#modal-region-title').html(topics[topic_id].region);
-    $('.modal-transcript-download').attr('onClick', "alert('This should download the transcript ... Eventually!'); return false;"); 
+    $('.modal-transcript-download').attr('onClick', 'downloadTranscript(' + topic_id + ');'); 
     
     topics[topic_id].keywords.forEach(function (element) {
         if (element != '') {
@@ -242,6 +244,11 @@ function openTopicModal (topic_id) {
 $('#topic-modal').on('shown.bs.modal', function() {
     $(document).off('focusin.modal');
 });
+
+function downloadTranscript(topic_id) {
+    alert(contributors[topics[topid_id].contributor].transcript_link);
+    return false;
+}
 
 function addToSearch (search_item) {
     $('#search-bar-input').value = search_item + " ";
@@ -332,7 +339,7 @@ function showRegionInfo(region_id) {
     var isRegionInfoVisible = $('#region-info-panel').is(':visible');
     $('#region-info-panel').css('display', 'block');
     $('.region-detailed-name').html(regions[region_id].name);
-    $('.region-detailed-name-desc').html(regions[region_id].name);
+    $('.region-detailed-description').html(regions[region_id].desc);
     $('.region-count').html(regions[region_id].count);
     $('.region-detailed-image').attr('src', 'images/detailed-maps/' + regions[region_id].image);
 
